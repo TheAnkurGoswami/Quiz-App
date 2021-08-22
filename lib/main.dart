@@ -15,9 +15,15 @@ class QuizApp extends StatefulWidget {
 
 class _QuizAppState extends State<QuizApp> {
   int _questionIdx = 0;
-  List<String> _questions = [
-    "What's your favorite color?",
-    "What's your favorite animal?"
+  var _questions = [
+    {
+      "question": "What's your favorite color?",
+      "answers": ["Red", "Black", "Blue", "Green"]
+    },
+    {
+      "question": "What's your favorite animal?",
+      "answers": ["Dog", "Cat", "Horse", "Lion"]
+    }
   ];
 
   void _answerQuestion() {
@@ -34,16 +40,19 @@ class _QuizAppState extends State<QuizApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.grey[900],
         appBar: AppBar(
           title: Text("Quiz App"),
           centerTitle: true,
+          backgroundColor: Colors.pink[800],
         ),
         body: Column(
           children: <Widget>[
-            Question(this._questions[this._questionIdx]),
-            Answer("Option 1"),
-            Answer("Option 2"),
-            Answer("Option 3"),
+            Question(this._questions[this._questionIdx]["question"] as String),
+            ...(this._questions[this._questionIdx]["answers"] as List<String>)
+                .map((answer) {
+              return Answer(answer, this._answerQuestion);
+            }).toList(),
           ],
         ),
       ),
