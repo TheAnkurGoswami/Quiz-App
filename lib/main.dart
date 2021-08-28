@@ -23,7 +23,7 @@ class _QuizAppState extends State<QuizApp> {
       return Column(children: [
         Container(
             width: double.infinity,
-            margin: EdgeInsets.fromLTRB(0, 200, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 250, 0, 0),
             child: Text(
               "Completed!",
               style: TextStyle(
@@ -47,9 +47,9 @@ class _QuizAppState extends State<QuizApp> {
             )),
         Container(
             width: double.infinity,
-            margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 100, 0, 0),
             child: ElevatedButton(
-              onPressed: _resetIdx,
+              onPressed: this._resetIdx,
               child: Text(
                 "Try Again?",
                 style: TextStyle(
@@ -70,6 +70,7 @@ class _QuizAppState extends State<QuizApp> {
   void _resetIdx() {
     setState(() {
       this._questionIdx = 0;
+      this._totalScore = 0;
     });
   }
 
@@ -86,14 +87,15 @@ class _QuizAppState extends State<QuizApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: Scaffold(
-      backgroundColor: Colors.grey[900],
-      appBar: AppBar(
-        title: Text("Quiz App"),
-        centerTitle: true,
-        backgroundColor: Colors.pink[800],
-      ),
-      body: _getWidget(),
-    ));
+          backgroundColor: Colors.grey[900],
+          appBar: AppBar(
+            title: Text("Math Quiz App"),
+            centerTitle: true,
+            backgroundColor: Colors.pink[800],
+          ),
+          body: _getWidget(),
+        ));
   }
 }
